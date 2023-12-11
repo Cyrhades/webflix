@@ -1,0 +1,18 @@
+extends layout.pug 
+
+block content
+    .container
+        .row.justify-content-center.mt-4
+            .col-6
+                h1 Connexion
+                if error 
+                    .alert.alert-danger #{error}
+                form(method="post")
+                    p
+                        label.form-label(for="username") Identifiant 
+                        input.form-control(type="text" name="usename" id="username")
+                    p
+                        label.form-label(for="password") Mot de passe 
+                        input.form-control(type="password" name="password" id="password")
+                    p
+                        button.btn.btn-secondary(type="submit") Se connecter

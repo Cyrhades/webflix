@@ -1,0 +1,23 @@
+{
+  "name": "webflix",
+  "version": "1.0.0",
+  "description": "exercice WebFlix avec TheMovieDB",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "watch": "browser-refresh server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migration": "node ./data/make_db.js",
+    "make_user": "node ./data/make_user.js"
+  },
+  "author": "LECOMTE Cyril",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "pug": "^3.0.2"
+  }
+}
