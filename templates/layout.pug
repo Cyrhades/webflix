@@ -17,8 +17,12 @@ html(lang="fr")
                     ul.navbar-nav
                         li.nav-item
                             a.nav-link.active(aria-current="page" href="/") Accueil
-                        li.nav-item
-                            a.nav-link.active(aria-current="page" href="/connexion") Connexion
+                        if username    
+                            li.nav-item
+                                a.nav-link.active(aria-current="page" href="/deconnexion") Se déconnecter
+                        else
+                            li.nav-item
+                                a.nav-link.active(aria-current="page" href="/connexion") Connexion
                         li.nav-item.dropdown
                             a.nav-link.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false")
                                 | Themes

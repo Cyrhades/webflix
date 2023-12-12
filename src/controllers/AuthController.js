@@ -26,3 +26,9 @@ export function post(req, res) {
         res.render('auth', { error });
     })
 }
+
+export function authControllerDeconnect(req, res) {
+    new Cookies(req,res).set('jwt',"", {maxAge: Date.now()});
+    req.flash('notify', 'Vous êtes maintenant déconnecté');
+    return res.redirect('/');
+}
