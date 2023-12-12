@@ -3,9 +3,23 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import routes from './app/routes.js';
+import session from 'express-session';
+import flash from 'express-flash-messages';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware express session
+//--------------------------------------------------------------------
+app.use(session({
+    secret: process.env.APP_KEY, resave:false, saveUninitialized:false, 
+    cookie: {maxAge: 3600000} 
+}));
+//--------------------------------------------------------------------
+//      Ajout du midlleware express flash messages
+//--------------------------------------------------------------------
+app.use(flash());
 
 //--------------------------------------------------------------------
 //      Mise en place du moteur de template
