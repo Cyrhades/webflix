@@ -1,0 +1,8 @@
+extends ../layout.pug
+block content
+    .container
+        if statut == 'error'
+            p(style="color:red") Vous avez échoué la double authentification
+        form(method="post")
+            input(type="text", name="number_2fa")
+            input(type="submit", value="Valider")

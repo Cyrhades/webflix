@@ -1,0 +1,16 @@
+extends ../layout.pug
+block content
+    .container
+        h1 Profil
+        p Bonjour #{username},
+        img(src=qr)
+        br
+        div ou saisir Manuellement les informations suivantes 
+        br
+        b Nom du compte : 
+        span #{account}
+        br
+        b Votre clé  : 
+        span #{key}
+        br
+        b Type de clé : Basé sur l'heure (OTP - One Time Password) 

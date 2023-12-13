@@ -29,8 +29,15 @@ export function controlJWT(req, res, next) {
     jwt.verify(token, process.env.JWT_SECRET, (err, dataJwt) => { 
         // Erreur du JWT (n'est pas un JWT, a été modifié, est expiré)
         if(err) return res.sendStatus(403);
-        
-        req.user = dataJwt.username;
+
+        if(req.session.a2f != undefined && req.session.a2f) {
+            next();
+        }
+        else if(dataJwt.a2f) {
+            return res.redirect('/2fa-valid');
+        } else {
+            req.user = dataJwt.username;
+            next();
+        }
     });
-    next();
 }
