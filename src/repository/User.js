@@ -9,3 +9,8 @@ export function selectByUsername(username) {
         }
     });
 }
+
+
+export function enableA2FByUsername(username) {    
+    return con.promise().query("UPDATE `user` SET ? WHERE ?",  [{a2f:true}, {username}]);
+}
