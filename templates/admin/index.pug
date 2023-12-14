@@ -7,15 +7,17 @@ block content
             input.form-control(type="search" name="q" id="q" value=q placeholder="Titre du film")
             button.btn.btn-secondary(type="submit") Chercher
 
-    if movies 
-        ul#resultMovies 
-            each movie in movies
-                li 
-                    if movie.poster_path
-                        img(src="https://image.tmdb.org/t/p/w500/"+movie.poster_path width="120")
-                    span.title #{movie.title} 
-                    br
-                    span.release Année de sortie : #{movie.release_date}
-                    br
-                    span Note spectateur : 
-                        span.notation #{movie.vote_average}
+    .container
+        if movies 
+            ul#resultMovies 
+                each movie in movies
+                    li 
+                        a(href="/admin/movie/"+movie.tmdb_id)
+                            if movie.poster_path
+                                img(src="https://image.tmdb.org/t/p/w500/"+movie.poster_path width="120")
+                            span.title #{movie.title} 
+                            br
+                            span.release Année de sortie : #{movie.release_date}
+                            br
+                            span Note spectateur : 
+                                span.notation #{movie.vote_average}

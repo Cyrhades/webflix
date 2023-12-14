@@ -1,4 +1,34 @@
 #resultMovies {
-    height:500px;
+    margin-top:120px;
+    height: 300px;
     overflow:auto;
+}
+
+#resultMovies {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap; /* Empêche le retour à la ligne des éléments li */
+}
+  
+#resultMovies li {
+    display: inline-block;
+    margin-right: 10px;
+    max-width: 200px;
+}
+  
+#resultMovies li img {
+    width: 150px; /* Ajuster la largeur des images selon vos besoins */
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#resultMovies li span.title {
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+    word-wrap: normal;
+    overflow-wrap: break-word;
 }

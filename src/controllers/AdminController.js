@@ -16,7 +16,7 @@ export default (req, res) => {
 
         fetch(url, options)
             .then(responseHttp => responseHttp.json())
-            .then(json => json.results.map(movie => { return {vote_average: movie.vote_average, release_date: movie.release_date, title: movie.title, poster_path: movie.poster_path } }))
+            .then(json => json.results.map(movie => { return {tmdb_id: movie.id, vote_average: movie.vote_average, release_date: movie.release_date, title: movie.title, poster_path: movie.poster_path } }))
             .then(movies => {
                 res.render('admin', {q:req.query.q,  movies })
             })
