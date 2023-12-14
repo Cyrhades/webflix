@@ -88,4 +88,40 @@
     font-weight: bold;
     font-size: 12px;
     color: #000000;
-  }
+}
+
+
+/** PRESENTATION FILM **/
+#prezMovie {
+    height:800px;
+    background: linear-gradient(to right, rgba(10.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(10.5, 31.5, 52.5, 0.84) 50%, rgba(10.5, 31.5, 52.5, 0.84) 100%);
+    background-size: cover;
+    color:#ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#prezMovie h2 {
+    font-weight: 700;
+}
+#prezMovie span.tagline {
+    font-size: 1.1em;
+    font-weight: 400;
+    font-style: italic;
+}
+#slideMovie {
+    background: linear-gradient(to right, rgba(10.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(10.5, 31.5, 52.5, 0.84) 50%, rgba(10.5, 31.5, 52.5, 0.84) 100%);
+}
+  
+.block-inline {
+    display:inline-block;
+}
+#prezMovie img {
+    width: 300px;
+    margin-bottom: 10px; /* Espacement entre l'image et le titre */
+}
+
+#prezMovie h4.synopsis {
+    margin-top: 20px;
+}
+#prezMovie span.sep { margin: 0 5px; }

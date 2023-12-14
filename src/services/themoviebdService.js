@@ -39,7 +39,8 @@ export function details(id) {
                 poster_path: json.poster_path,
                 backdrop_path: json.backdrop_path,
                 genres: json.genres,
-                overview: json.overview
+                overview: json.overview,
+                tagline: json.tagline
             } 
         })
         .catch(err => console.error('error:' + err));

@@ -1,12 +1,30 @@
 extends ../layout.pug 
 
 block content
-    h1 Présentation du film !
-
-    div(style="background-image: url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces"+movie.backdrop_path+"');")
-        h2 #{movie.title}
-        br
-        p #{movie.overview}
-        br
-        form(method="post")
-            button(type="submit") Enregistrer ce film
+    #slideMovie
+        div(style="background-image: url('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces"+movie.backdrop_path+"');")
+            #prezMovie 
+                .container
+                    .row
+                        .col-3
+                            img(src="https://image.tmdb.org/t/p/w500/"+movie.poster_path)
+                        .col-9 
+                            h2 #{movie.title}
+                            span.release #{movie.release_date} 
+                            span.sep  • 
+                            span
+                                each genre, index in movie.genres.slice(0, -1)
+                                    | #{genre.name}, 
+                                if movie.genres.length
+                                    span #{movie.genres[movie.genres.length - 1].name}
+                            br
+                            span Note des utilisateurs : 
+                            span.notation #{movie.vote_average}
+                            br
+                            br
+                            span.tagline #{movie.tagline}
+                            h4.synopsis Synopsis
+                            p #{movie.overview}
+                            br
+                            form(method="post")
+                                button.btn.btn-secondary(type="submit") Enregistrer ce film
