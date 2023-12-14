@@ -1,34 +1,90 @@
-#resultMovies {
-    margin-top:120px;
-    height: 300px;
+#resultMovies {   
+    user-select: none; 
+    height: 320px;
     overflow:auto;
-}
-
-#resultMovies {
+    margin: 20px auto;
+    overflow-x: auto;
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-top:60px;
     white-space: nowrap; /* Empêche le retour à la ligne des éléments li */
 }
   
+/* Couleur de fond de la scrollbar */
+#resultMovies::-webkit-scrollbar {
+    height:5px;
+    width: 10px;
+    background-color: #f5f5f5;
+}
+
+/* Styles de la poignée (thumb) de la scrollbar */
+#resultMovies::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+/* Styles lorsque la poignée est survolée */
+#resultMovies::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Styles des boutons de la scrollbar (haut/bas) */
+#resultMovies::-webkit-scrollbar-button {
+    display: none;
+}
+
 #resultMovies li {
+    position: relative;
     display: inline-block;
-    margin-right: 10px;
-    max-width: 200px;
+    margin: 10px;
+    width: 210px;
+    list-style: none;
+    text-align: center;
+}
+
+#resultMovies li a, #resultMovies li  a:hover{
+    color: #ffffff;
+    text-decoration: none;
 }
   
 #resultMovies li img {
-    width: 150px; /* Ajuster la largeur des images selon vos besoins */
+    width: 150px; 
     height: auto;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin:auto;
 }
 
+
 #resultMovies li span.title {
+    margin-top: 5px;
+    font-weight: bold;
     font-size: 1em;
     margin: 0;
     width: 100%;
-    word-wrap: normal;
-    overflow-wrap: break-word;
+    display: inline-block; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+#resultMovies li span.release {
+    display: block;
+    margin-top: 5px; /* Espace entre le titre et l'année */
+    color: #666; /* Couleur du texte de l'année */
+}
+  
+  
+#resultMovies li span.notation {
+    position: absolute;
+    bottom: 65px;
+    right: 15px;
+    background-color: white; /* Fond blanc pour la notation */
+    padding: 5px; /* Espace à l'intérieur du bloc blanc */
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #000000;
+  }

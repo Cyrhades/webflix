@@ -26,5 +26,4 @@ export default (app) => {
     
     app.get('/admin', adminController)
     app.get('/admin/toto', adminController)
-
 };
