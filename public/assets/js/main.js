@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-theme]').forEach((element) => {
         element.addEventListener('click', (e) => {
             e.preventDefault();
-            document.body.setAttribute('data-bs-theme', e.currentTarget.getAttribute('data-theme'));
+            const selectedTheme = e.currentTarget.getAttribute('data-theme');
+            document.body.setAttribute('data-bs-theme', selectedTheme);
+            enregistrerTheme(selectedTheme); 
         })
     });
+    chargerThemeEnregistre();
 
     document.querySelectorAll('.notation').forEach((element) => {
         element.textContent = notation(parseFloat(element.textContent));
@@ -12,6 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.release').forEach((element) => {
         element.textContent = date_release(element.textContent);
     })
+
+    // Affichage de la page après l'intro
+    if(document.querySelector('#containerWebflix')) {        
+        window.setTimeout(()=> {
+            document.querySelector('#containerWebflix').remove();
+            document.querySelector('.hideBeforeIntro').classList.remove('hideBeforeIntro')
+        },5000)
+    } else {
+        document.querySelector('.hideBeforeIntro').classList.remove('hideBeforeIntro')
+    }
 })
 
 function notation(note) {
@@ -29,4 +42,16 @@ function date_release(dateString) {
       "Jan.", "Fév.", "Mar.", "Avr.", "Mai", "Juin", "Juil.", "Août", "Sept.", "Oct.", "Nov.", "Déc."
     ];
     return `${dateObj.getDate()} ${moisNoms[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+}
+
+
+function enregistrerTheme(theme) {
+    localStorage.setItem('theme', theme);
+}
+
+function chargerThemeEnregistre() {
+    const themeEnregistre = localStorage.getItem('theme');
+    if (themeEnregistre != document.body.getAttribute('data-bs-theme')) {
+        document.body.setAttribute('data-bs-theme', themeEnregistre);
+    }
 }

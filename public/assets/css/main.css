@@ -1,3 +1,4 @@
+.hideBeforeIntro { display:none; }
 #resultMovies {   
     user-select: none; 
     height: 320px;

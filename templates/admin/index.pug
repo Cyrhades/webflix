@@ -1,21 +1,28 @@
 extends ../layout.pug 
 
+block css 
+    if (typeof q === 'undefined')
+        link(href="/assets/css/intro.css" rel="stylesheet")
 block content
-    .container
-        form(action="/admin" method="get")            
-            label.form-label(for="q") Titre du film 
-            input.form-control(type="search" name="q" id="q" value=q placeholder="Titre du film")
-            button.btn.btn-secondary(type="submit") Chercher
+    if (typeof q === 'undefined')
+        include intro.pug
 
-    .container
-        if movies 
-            ul#resultMovies 
-                each movie in movies
-                    if movie.poster_path
-                        li 
-                            a(href="/admin/movie/"+movie.tmdb_id)
-                                img(src="https://image.tmdb.org/t/p/w500/"+movie.poster_path width="120")
-                                div.content_tmdb
-                                    span.notation #{movie.vote_average}
-                                    span.title #{movie.title} 
-                                    span.release #{movie.release_date}
+    .hideBeforeIntro
+        .container
+            form(action="/admin" method="get")            
+                label.form-label(for="q") Titre du film 
+                input.form-control(type="search" name="q" id="q" value=q placeholder="Titre du film")
+                button.btn.btn-secondary(type="submit") Chercher
+
+        .container
+            if movies 
+                ul#resultMovies 
+                    each movie in movies
+                        if movie.poster_path
+                            li 
+                                a(href="/admin/movie/"+movie.tmdb_id)
+                                    img(src="https://image.tmdb.org/t/p/w500/"+movie.poster_path width="120")
+                                    div.content_tmdb
+                                        span.notation #{movie.vote_average}
+                                        span.title #{movie.title} 
+                                        span.release #{movie.release_date}

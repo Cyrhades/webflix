@@ -1,8 +1,7 @@
 import fetch from 'node-fetch';
 
 export default (req, res) => {
-    console.log(req.query.q)
-
+    
     if(req.query.q !== undefined && req.query.q != "") {
 
         const url = `https://api.themoviedb.org/3/search/movie?query=${req.query.q}&include_adult=false&language=en-US&page=1`;
