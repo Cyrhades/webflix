@@ -10,11 +10,11 @@ block content
     .hideBeforeIntro
         .container
             form(action="/admin" method="get")    
-            .mb-3        
-                label.form-label(for="q") Titre du film 
-                input.form-control(type="search" name="q" id="q" value=q placeholder="Titre du film")
-            .mb-3 
-                button.btn.btn-secondary(type="submit") Chercher
+                .mb-3        
+                    label.form-label(for="q") Titre du film 
+                    input.form-control(type="search" name="q" id="q" value=q placeholder="Titre du film")
+                .mb-3 
+                    button.btn.btn-secondary(type="submit") Chercher
 
         .container
             if movies 

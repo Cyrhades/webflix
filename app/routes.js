@@ -1,6 +1,6 @@
 import homeController from '../src/controllers/HomeController.js';
 import { get as authControllerGet, post as authControllerPost, authControllerDeconnect} from '../src/controllers/AuthController.js';
-import adminController from '../src/controllers/AdminController.js';
+import * as adminController from '../src/controllers/AdminController.js';
 import {userExists, controlJWT} from '../src/services/jwtService.js';
 import * as a2f from '../src/services/a2fService.js';
 
@@ -24,6 +24,6 @@ export default (app) => {
     app.post('/connexion', authControllerPost);
     app.get('/deconnexion', authControllerDeconnect);
     
-    app.get('/admin', adminController)
-    app.get('/admin/toto', adminController)
+    app.get('/admin', adminController.searchMovie)
+    app.get('/admin/movie/:id', adminController.saveMovie)
 };

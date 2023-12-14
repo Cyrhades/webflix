@@ -1,27 +1,23 @@
-import fetch from 'node-fetch';
+import {search, details} from "../services/themoviebdService.js";
 
-export default (req, res) => {
-    
+export function searchMovie(req, res) {
     if(req.query.q !== undefined && req.query.q != "") {
-
-        const url = `https://api.themoviedb.org/3/search/movie?query=${req.query.q}&include_adult=false&language=en-US&page=1`;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${process.env.TMDB_TOKEN}`
-            }
-        };
-
-        fetch(url, options)
-            .then(responseHttp => responseHttp.json())
-            .then(json => json.results.map(movie => { return {tmdb_id: movie.id, vote_average: movie.vote_average, release_date: movie.release_date, title: movie.title, poster_path: movie.poster_path } }))
-            .then(movies => {
-                res.render('admin', {q:req.query.q,  movies })
-            })
-            .catch(err => console.error('error:' + err));
+        search(req.query.q).then(movies => {  
+            res.render('admin', {q:req.query.q,  movies })
+        });
     }
     else {
         res.render('admin');
     }
+}
+
+
+export function saveMovie(req, res) {
+    if(req.params.id !== undefined && parseInt(req.params.id) > 0) {
+        details(req.params.id).then(movie => {
+            res.render('admin/save', {movie});
+        })
+    } else {
+        res.redirect('/admin')
+    }   
 }
