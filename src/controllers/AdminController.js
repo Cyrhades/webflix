@@ -1,5 +1,6 @@
 import {search, details} from "../services/themoviebdService.js";
-import {getByTmdbId, addMovie} from "../repository/Movie.js";
+import * as Movie from "../repository/Movie.js";
+import * as Genre from "../repository/Genre.js";
 
 export function searchMovie(req, res) {
     if(req.query.q !== undefined && req.query.q != "") {
@@ -15,7 +16,7 @@ export function searchMovie(req, res) {
 
 export function saveMovie(req, res) {
     if(req.params.id !== undefined && parseInt(req.params.id) > 0) {
-        getByTmdbId(req.params.id).then((result) => {
+        Movie.getByTmdbId(req.params.id).then((result) => {
             details(req.params.id).then(movie => {
                 res.render(
                     'admin/save', 
@@ -42,13 +43,29 @@ export function saveInBddMovie(req, res) {
                 tagline: movie.tagline || "",
                 user_id: req.user_id,
             };
-            addMovie(saveMovie).then((result) => {
-                const idMovie = result[0].insertId;
-                // Gérer l'enregistrement des genres
 
+            const idsGenre = {};
+            const promises = [];
+            movie.genres.forEach(async (genre) => {
+                promises[promises.length] = Genre.getByTmdbId(genre.id).then(async (currentGenre) => {
+                    if(currentGenre != false) {
+                        idsGenre[currentGenre.tmdb_id] = currentGenre.id;
+                    } else {
+                        await Genre.addGenre({tmdb_id: genre.id, name: genre.name }).then((result) => {
+                            idsGenre[genre.id] = result[0].insertId;
+                        })
+                    }
+                })
+            });
 
-                req.flash("notify", `Le film a bien été enregistré !`)
-                res.redirect('/admin/movie/'+req.params.id);
+            Promise.all(promises).then(() => {
+                Movie.addMovie(saveMovie).then((result) => {
+                    for(const id in idsGenre) {
+                        Movie.addMovieGenre(result[0].insertId, idsGenre[id]);
+                    }    
+                    req.flash("notify", `Le film a bien été enregistré !`)
+                    res.redirect('/admin/movie/'+req.params.id);
+                })
             })
         })
     } else {
