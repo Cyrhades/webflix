@@ -44,15 +44,15 @@ export function saveInBddMovie(req, res) {
                 user_id: req.user_id,
             };
 
-            const idsGenre = {};
+            const idsGenre = [];
             const promises = [];
             movie.genres.forEach(async (genre) => {
                 promises[promises.length] = Genre.getByTmdbId(genre.id).then(async (currentGenre) => {
                     if(currentGenre != false) {
-                        idsGenre[currentGenre.tmdb_id] = currentGenre.id;
+                        idsGenre.push(currentGenre.id);
                     } else {
                         await Genre.addGenre({tmdb_id: genre.id, name: genre.name }).then((result) => {
-                            idsGenre[genre.id] = result[0].insertId;
+                            idsGenre.push(result[0].insertId);
                         })
                     }
                 })
@@ -60,9 +60,9 @@ export function saveInBddMovie(req, res) {
 
             Promise.all(promises).then(() => {
                 Movie.addMovie(saveMovie).then((result) => {
-                    for(const id in idsGenre) {
-                        Movie.addMovieGenre(result[0].insertId, idsGenre[id]);
-                    }    
+                    idsGenre.forEach(async (genre) => {
+                        await Movie.addMovieGenre(result[0].insertId, genre);
+                    });
                     req.flash("notify", `Le film a bien été enregistré !`)
                     res.redirect('/admin/movie/'+req.params.id);
                 })
