@@ -26,5 +26,6 @@ block content
                             h4.synopsis Synopsis
                             p #{movie.overview}
                             br
-                            form(method="post")
-                                button.btn.btn-secondary(type="submit") Enregistrer ce film
+                            if !exists
+                                form(method="post")
+                                    button.btn.btn-secondary(type="submit") Enregistrer ce film

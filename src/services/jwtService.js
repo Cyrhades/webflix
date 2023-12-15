@@ -11,6 +11,7 @@ export function userExists(req, res, next) {
         // Erreur du JWT (n'est pas un JWT, a été modifié, est expiré)
         if(err) req.user = null;
         else {
+            req.user_id = dataJwt.id;
             req.user = dataJwt.username;
             res.locals.username = req.user;
         }

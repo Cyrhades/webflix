@@ -12,7 +12,7 @@ export function post(req, res) {
     selectByUsername(req.body.usename).then((user) => {
         if(user !== null) {
             if(bcrypt.compareSync(req.body.password, user.password)) {
-                let accessToken = jwt.sign({username: user.username, a2f: user.a2f}, process.env.JWT_SECRET, {expiresIn: 604800});       
+                let accessToken = jwt.sign({id: user.id, username: user.username, a2f: user.a2f}, process.env.JWT_SECRET, {expiresIn: 604800});       
                 new Cookies(req,res).set('jwt', accessToken, {httpOnly: true, secure: (process.env.APP_ENV === 'production') });
 
                 req.flash('notify', 'Vous êtes maintenant connecté');
