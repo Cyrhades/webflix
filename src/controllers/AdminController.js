@@ -34,19 +34,19 @@ export function saveInBddMovie(req, res) {
             const saveMovie = {
                 tmdb_id: movie.tmdb_id,
                 title: movie.title,
-                release_date: movie.release_date,
-                synopsis: movie.overview,
-                note: movie.vote_average,
-                poster: movie.poster_path,
-                backdrop: movie.backdrop_path,
-                tagline: movie.tagline,
+                release_date: movie.release_date  || "",
+                synopsis: movie.overview  || "",
+                note: movie.vote_average  || 0,
+                poster: movie.poster_path  || "",
+                backdrop: movie.backdrop_path  || "",
+                tagline: movie.tagline || "",
                 user_id: req.user_id,
             };
             addMovie(saveMovie).then((result) => {
                 const idMovie = result[0].insertId;
                 // Gérer l'enregistrement des genres
 
-                
+
                 req.flash("notify", `Le film a bien été enregistré !`)
                 res.redirect('/admin/movie/'+req.params.id);
             })

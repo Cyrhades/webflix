@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chargerThemeEnregistre();
 
     document.querySelectorAll('.notation').forEach((element) => {
-        element.textContent = notation(parseFloat(element.textContent));
+        element.innerHTML = notation(parseFloat(element.textContent));
     })
     document.querySelectorAll('.release').forEach((element) => {
         element.textContent = date_release(element.textContent);
@@ -29,10 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function notation(note) {
     let stars = Math.round(note/2);
-    let notationStr = '';
+    let notationStr = '<span class="star-on">';
     if(stars > 5) stars = 5;
-    for (let i = 0; i < stars; i++) notationStr += `⭐`;    
+    for (let i = 0; i < stars; i++) notationStr += `⭐`;   
+    notationStr += '</span><span class="star-off">'; 
     if (stars < 5) notationStr += `★`.repeat(Math.ceil(5-stars)).substring(0,(5-stars));
+    notationStr += '</span>'; 
     return notationStr;
 }
 
