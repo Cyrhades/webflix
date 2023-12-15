@@ -26,4 +26,5 @@ export default (app) => {
     
     app.get('/admin', adminController.searchMovie)
     app.get('/admin/movie/:id', adminController.saveMovie)
+    app.post('/admin/movie/:id', adminController.saveInBddMovie)
 };
