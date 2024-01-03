@@ -8,7 +8,7 @@
     "watch": "browser-refresh server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migration": "node ./data/make_db.js",
+    "migration": "node ./data/make_db.js migration",
     "make_user": "node ./data/make_user.js"
   },
   "author": "LECOMTE Cyril",
