@@ -19,7 +19,7 @@ fs.readdir('./data/', (err, files) => {
         const sqlQuery = fs.readFileSync(path.join(__dirname, sqlFile), 'utf-8');
 
         // Exécuter le script SQL lu depuis le fichier
-        allSql.push(con.promise().query(sqlQuery).catch(()=>{}));
+        allSql.push(con.promise().query(sqlQuery).catch((e)=>{console.log(e.message)}));
     });
     // on quitte le processus quand toute les requetes ont été eecutée
     Promise.all(allSql).then((values) => { process.exit(); });
